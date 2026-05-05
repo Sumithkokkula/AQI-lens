@@ -1,45 +1,119 @@
-# AQI Lens — Hyderabad
+# 🌫️ AQI Lens — Hyperlocal Air Quality Predictor
 
-A hyperlocal air quality prediction web app that predicts AQI at **100m resolution** across Hyderabad — including areas with no physical sensors — by combining satellite NO₂ data with ground sensor readings using XGBoost regression.
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/XGBoost-AA4A44?style=for-the-badge&logo=xgboost&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white"/>
+  <img src="https://img.shields.io/badge/GeoPandas-139C5A?style=for-the-badge&logo=python&logoColor=white"/>
+</p>
 
-## The problem
-Hyderabad has ~12 government air quality sensors for a city of 10 million people. That means most streets have no idea what their air quality actually is.
+> Predicts street-level air quality at **100m resolution** across Hyderabad — including areas with **zero physical sensors** — by fusing satellite NO₂ data with ground sensor readings using XGBoost regression.
 
-## How it works
-1. **Satellite data** — Sentinel-5P provides city-wide NO₂ readings (simulated here, production version uses Google Earth Engine)
-2. **Ground sensors** — CPCB station readings provide real AQI ground truth at 12 locations
-3. **Feature engineering** — Each 100m grid cell gets: NO₂ value, road density, elevation, wind speed
-4. **XGBoost model** — Trained on sensor cells, predicts AQI for all 3,600 city grid cells
-5. **Streamlit app** — Interactive map + stats dashboard
+---
 
-## Unique feature
-Predicts AQI where **no sensors exist** using spatial interpolation powered by ML — not just distance-based averaging, but geography-aware prediction that accounts for roads, terrain, and wind.
+## 🚨 The Problem
 
-## Tech stack
-- `XGBoost` — gradient boosted regression model
-- `Streamlit` — web app framework
-- `Folium` — interactive map rendering
-- `GeoPandas / NumPy / Pandas` — data processing
+Hyderabad has ~12 government air quality sensors for a city of **10 million people**. That means most streets have no idea what their air quality actually is — yet people commute, exercise, and live in areas with potentially hazardous pollution.
 
-## Run locally
+---
+
+## 💡 The Solution
+
+AQI Lens builds a **3,600-cell geospatial grid** over the city and predicts AQI for every cell — including those far from any sensor — using a geography-aware ML model. Not simple distance interpolation, but feature-rich spatial prediction accounting for roads, terrain, and wind.
+
+---
+
+## 🏗️ How It Works
+
+```
+Sentinel-5P Satellite (NO₂ data)
+        +
+CPCB Ground Sensors (12 locations)
+        ↓
+Feature Engineering per 100m grid cell:
+  • NO₂ concentration
+  • Road density
+  • Elevation
+  • Wind speed
+        ↓
+XGBoost Regression Model
+(trained on sensor cells, predicts all 3,600 cells)
+        ↓
+Interactive Streamlit Dashboard
+with real-time Folium heatmap
+```
+
+---
+
+## ✨ Key Features
+
+- 🗺️ **City-wide AQI heatmap** at 100m spatial resolution
+- 🤖 **ML-powered prediction** for sensor-absent areas using XGBoost
+- 🛰️ **Satellite data integration** — Sentinel-5P NO₂ readings via Google Earth Engine
+- 📊 **Interactive dashboard** — filter by zone, severity, and time
+- ⚡ **Streamlit web app** — runs locally in one command
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| ML Model | XGBoost (Gradient Boosted Regression) |
+| Web App | Streamlit |
+| Map Visualization | Folium |
+| Geospatial Processing | GeoPandas |
+| Data Processing | Pandas, NumPy |
+| Satellite Data | Sentinel-5P (simulated; production uses Google Earth Engine) |
+
+---
+
+## 📁 Project Structure
+
+```
+aqi-lens/
+├── app.py          # Streamlit web app & dashboard
+├── model.py        # XGBoost training + prediction pipeline
+├── features.py     # Grid generation + feature engineering
+├── data.py         # CPCB sensor data + NO₂ grid simulation
+└── requirements.txt
+```
+
+---
+
+## 🚀 Run Locally
+
 ```bash
-git clone https://github.com/YOUR_USERNAME/aqi-lens.git
-cd aqi-lens
+git clone https://github.com/Sumithkokkula/AQI-lens.git
+cd AQI-lens
 python3 -m venv venv
-source venv/bin/activate
+source venv/bin/activate      # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 streamlit run app.py
 ```
 
-## Project structure
-```
-aqi-lens/
-├── app.py            # Streamlit web app
-├── model.py          # XGBoost training + prediction
-├── features.py       # Grid building + feature engineering
-├── data.py           # Sensor data + NO₂ grid generation
-└── requirements.txt  # Dependencies
-```
+Open `http://localhost:8501` in your browser.
 
-## Resume line
-> Built a hyperlocal AQI prediction system for Hyderabad combining Sentinel-5P satellite NO₂ data with CPCB ground sensors using XGBoost regression. Predicted street-level air quality at 100m resolution across the city — including sensor-absent areas — by engineering features from road density and terrain elevation. Deployed as an interactive Streamlit web app.
+---
+
+## 📈 Results
+
+- Predicts AQI across **3,600 grid cells** covering Hyderabad
+- Model trained on **12 CPCB ground sensor** readings
+- Features engineered from **satellite NO₂ + road density + elevation + wind speed**
+- Deployed as a live interactive web dashboard
+
+---
+
+## 🔮 Future Improvements
+
+- [ ] Integrate live Sentinel-5P data via Google Earth Engine API
+- [ ] Add temporal forecasting (predict AQI 24h ahead)
+- [ ] Deploy on cloud (Streamlit Cloud / Hugging Face Spaces)
+- [ ] Add health advisory alerts per zone
+
+---
+
+## 👤 Author
+
+**Sumith Kokkula** · [LinkedIn](https://www.linkedin.com/in/sumith-kokkula-6a240b329) · [GitHub](https://github.com/Sumithkokkula)
