@@ -11,6 +11,18 @@
 
 ---
 
+## 📸 Screenshots
+
+### City AQI Heatmap
+![City AQI Heatmap — Hyderabad at 100m resolution](aqi_heatmap.png)
+*Interactive heatmap showing predicted AQI across Hyderabad. Orange = Moderate (101–200), Green = Good/Satisfactory. Blue pins = CPCB sensor stations with live readings.*
+
+### Feature Importance & Raw Prediction Data
+![Feature Importance and Raw Prediction Data](aqi_feature_importance.png)
+*NO₂ satellite data (48%) and road density (27%) are the strongest predictors. The table shows raw per-cell predictions with all input features.*
+
+---
+
 ## 🚨 The Problem
 
 Hyderabad has ~12 government air quality sensors for a city of **10 million people**. That means most streets have no idea what their air quality actually is — yet people commute, exercise, and live in areas with potentially hazardous pollution.
@@ -31,26 +43,29 @@ Sentinel-5P Satellite (NO₂ data)
 CPCB Ground Sensors (12 locations)
         ↓
 Feature Engineering per 100m grid cell:
-  • NO₂ concentration
-  • Road density
-  • Elevation
-  • Wind speed
+  • NO₂ concentration  →  48% feature importance
+  • Road density       →  27% feature importance
+  • Wind speed         →  13% feature importance
+  • Elevation          →   8% feature importance
+  • Hour of day        →   4% feature importance
         ↓
 XGBoost Regression Model
 (trained on sensor cells, predicts all 3,600 cells)
         ↓
 Interactive Streamlit Dashboard
-with real-time Folium heatmap
+with real-time Folium heatmap + sensor station panel
 ```
 
 ---
 
 ## ✨ Key Features
 
-- 🗺️ **City-wide AQI heatmap** at 100m spatial resolution
+- 🗺️ **City-wide AQI heatmap** at 100m spatial resolution across Hyderabad
+- 📡 **Live sensor station panel** — real-time AQI readings from all 12 CPCB stations
 - 🤖 **ML-powered prediction** for sensor-absent areas using XGBoost
 - 🛰️ **Satellite data integration** — Sentinel-5P NO₂ readings via Google Earth Engine
-- 📊 **Interactive dashboard** — filter by zone, severity, and time
+- 📊 **Feature importance visualization** — understand what drives AQI predictions
+- 🔢 **Raw prediction table** — inspect per-cell predictions with all input features
 - ⚡ **Streamlit web app** — runs locally in one command
 
 ---
@@ -61,7 +76,7 @@ with real-time Folium heatmap
 |---|---|
 | ML Model | XGBoost (Gradient Boosted Regression) |
 | Web App | Streamlit |
-| Map Visualization | Folium |
+| Map Visualization | Folium + Leaflet |
 | Geospatial Processing | GeoPandas |
 | Data Processing | Pandas, NumPy |
 | Satellite Data | Sentinel-5P (simulated; production uses Google Earth Engine) |
@@ -98,10 +113,14 @@ Open `http://localhost:8501` in your browser.
 
 ## 📈 Results
 
-- Predicts AQI across **3,600 grid cells** covering Hyderabad
-- Model trained on **12 CPCB ground sensor** readings
-- Features engineered from **satellite NO₂ + road density + elevation + wind speed**
-- Deployed as a live interactive web dashboard
+| Metric | Value |
+|---|---|
+| Grid resolution | 100m × 100m |
+| Total grid cells | 3,600 |
+| CPCB training sensors | 12 |
+| Top predictor | NO₂ satellite data (48%) |
+| Highest AQI station | Nacharam — 173.2 (Moderate) |
+| Lowest AQI station | Gandipet — 55.5 (Satisfactory) |
 
 ---
 
@@ -109,7 +128,7 @@ Open `http://localhost:8501` in your browser.
 
 - [ ] Integrate live Sentinel-5P data via Google Earth Engine API
 - [ ] Add temporal forecasting (predict AQI 24h ahead)
-- [ ] Deploy on cloud (Streamlit Cloud / Hugging Face Spaces)
+- [ ] Deploy on Streamlit Cloud / Hugging Face Spaces
 - [ ] Add health advisory alerts per zone
 
 ---
