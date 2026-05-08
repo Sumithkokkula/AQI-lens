@@ -31,7 +31,6 @@ def build_feature_grid():
     wind_speed = np.clip(wind_speed, 1, 35)
 
     hour_of_day = 10
-
     rows = []
     for i in range(GRID_SIZE):
         for j in range(GRID_SIZE):
@@ -47,7 +46,6 @@ def build_feature_grid():
                 "grid_j":       j,
             })
     return pd.DataFrame(rows)
-
 if __name__ == "__main__":
     df = build_feature_grid()
     print(f"Grid built: {len(df)} cells")
