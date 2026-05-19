@@ -6,13 +6,11 @@ from streamlit_folium import st_folium
 from data import get_sensor_readings, aqi_category
 from model import train_and_predict
 import os
-
 st.set_page_config(
     page_title="AQI Lens — Hyderabad",
     page_icon="🌿",
     layout="wide",
 )
-
 st.markdown("""
 <style>
     .block-container { padding-top: 1.5rem; }
@@ -26,7 +24,6 @@ def aqi_color(aqi):
     if aqi <= 200:  return "#f39c12"
     if aqi <= 300:  return "#e74c3c"
     return "#8e44ad"
-
 def load_data():
     if os.path.exists("predictions.csv"):
         grid_df = pd.read_csv("predictions.csv")
@@ -55,7 +52,6 @@ col4.metric("Grid cells predicted", f"{len(grid_df):,}")
 st.markdown("---")
 
 left, right = st.columns([2, 1])
-
 with left:
     st.subheader("City AQI heatmap")
 
