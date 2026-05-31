@@ -11,7 +11,7 @@
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 ### City AQI Heatmap
 ![City AQI Heatmap — Hyderabad at 100m resolution](aqi_heatmap.png)
@@ -23,19 +23,19 @@
 
 ---
 
-## 🚨 The Problem
+## The Problem
 
 Hyderabad has ~12 government air quality sensors for a city of **10 million people**. That means most streets have no idea what their air quality actually is — yet people commute, exercise, and live in areas with potentially hazardous pollution.
 
 ---
 
-## 💡 The Solution
+## The Solution
 
 AQI Lens builds a **3,600-cell geospatial grid** over the city and predicts AQI for every cell — including those far from any sensor — using a geography-aware ML model. Not simple distance interpolation, but feature-rich spatial prediction accounting for roads, terrain, and wind.
 
 ---
 
-## 🏗️ How It Works
+## How It Works
 
 ```
 Sentinel-5P Satellite (NO₂ data)
@@ -58,14 +58,14 @@ with real-time Folium heatmap + sensor station panel
 
 ---
 
-## ✨ Key Features
+## Key Features
 
-- 🗺️ **City-wide AQI heatmap** at 100m spatial resolution across Hyderabad
-- 📡 **Live sensor station panel** — real-time AQI readings from all 12 CPCB stations
-- 🤖 **ML-powered prediction** for sensor-absent areas using XGBoost
-- 🛰️ **Satellite data integration** — Sentinel-5P NO₂ readings via Google Earth Engine
-- 📊 **Feature importance visualization** — understand what drives AQI predictions
-- 🔢 **Raw prediction table** — inspect per-cell predictions with all input features
+- **City-wide AQI heatmap** at 100m spatial resolution across Hyderabad
+-  **Live sensor station panel** — real-time AQI readings from all 12 CPCB stations
+-  **ML-powered prediction** for sensor-absent areas using XGBoost
+-  **Satellite data integration** — Sentinel-5P NO₂ readings via Google Earth Engine
+- **Feature importance visualization** — understand what drives AQI predictions
+- **Raw prediction table** — inspect per-cell predictions with all input features
 - ⚡ **Streamlit web app** — runs locally in one command
 
 ---
@@ -111,7 +111,7 @@ Open `http://localhost:8501` in your browser.
 
 ---
 
-## 📈 Results
+## Results
 
 | Metric | Value |
 |---|---|
@@ -124,7 +124,7 @@ Open `http://localhost:8501` in your browser.
 
 ---
 
-## 🔮 Future Improvements
+## Future Improvements
 
 - [ ] Integrate live Sentinel-5P data via Google Earth Engine API
 - [ ] Add temporal forecasting (predict AQI 24h ahead)
