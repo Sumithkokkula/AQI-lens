@@ -5,7 +5,6 @@
   <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white"/>
   <img src="https://img.shields.io/badge/GeoPandas-139C5A?style=for-the-badge&logo=python&logoColor=white"/>
 </p>
-
 Predicts street-level air quality at **100m resolution** across Hyderabad including areas with **zero physical sensors** by fusing satellite NO₂ data with ground sensor readings using XGBoost regression.
 
 ---
